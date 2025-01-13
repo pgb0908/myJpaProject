@@ -1,8 +1,10 @@
-package bong.service.collector.data;
+package bong.service.collector.domain;
 
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -23,7 +25,9 @@ public class User {
     @OneToOne(mappedBy = "user")
     private Item item;
 
-    @OneToMany
-    @JoinColumn(name)
-    private Like like;
+    @OneToMany(mappedBy = "user")
+    private List<Like> likes = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    private List<Collection> collections = new ArrayList<>();
 }

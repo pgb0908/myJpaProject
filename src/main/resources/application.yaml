@@ -2,7 +2,10 @@ spring:
   application:
     name=collector
   datasource:
-    url: jdbc:h2:tcp://localhost//home/bont/Desktop/work/db/h2DB
+    url: jdbc:h2:tcp://localhost//home/bong/Desktop/work/h2db/h2_230
     driver-class-name: org.h2.Driver
     username: sa
     password:
+  jpa:
+    hibernate:
+      ddl-auto: update # 부팅 시 ddl 자동 생성
