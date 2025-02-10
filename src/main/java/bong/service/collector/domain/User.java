@@ -1,6 +1,8 @@
 package bong.service.collector.domain;
 
 import jakarta.persistence.*;
+import lombok.Builder;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -8,17 +10,20 @@ import java.util.List;
 
 @Entity
 @Table(name = "users")
+@Getter
 public class User {
 
     @Id
-    @GeneratedValue
-    @Column(name = "user_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(unique = true)
+    private String userId;
 
     @Column(nullable = false)
     private String password;
 
-    private String name;
+    private String roles;
 
     private LocalDateTime createAt;
 
@@ -30,4 +35,5 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<Collection> collections = new ArrayList<>();
+
 }

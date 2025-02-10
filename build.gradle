@@ -32,8 +32,12 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
+	// Spring Security
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+
 	implementation 'com.h2database:h2'
 
+	// (선택) Spring Boot DevTools - 개발 시 핫 리로드
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 }
 
