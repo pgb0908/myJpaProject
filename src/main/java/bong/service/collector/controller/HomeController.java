@@ -12,7 +12,7 @@ public class HomeController {
         Boolean hasSession = false;
 
         if(!hasSession){
-            return "login";
+            return "redirect:/login";
         }
 
         return "index";
