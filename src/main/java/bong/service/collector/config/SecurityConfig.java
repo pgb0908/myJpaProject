@@ -31,7 +31,7 @@ public class SecurityConfig {
                 )*/
                 .authorizeHttpRequests(auth -> auth
                         .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
-                        .requestMatchers("/css/**", "/js/**", "/images/**").permitAll() // 정적 리소스 허용
+                        .requestMatchers("/asset/**", "/css/**", "/js/**", "/images/**", "/favicon.ico").permitAll() // 정적 리소스 허용
                         .anyRequest().authenticated()
                 )
 
