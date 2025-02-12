@@ -24,7 +24,6 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(csrf -> csrf.disable()) // CSRF 보호 비활성화
-
 /*                .authorizeHttpRequests(request -> request
                         .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
                         .anyRequest().authenticated()  // 어떠한 요청이라도 인증필요
@@ -34,11 +33,6 @@ public class SecurityConfig {
                         .requestMatchers("/asset/**", "/css/**", "/js/**", "/images/**", "/favicon.ico").permitAll() // 정적 리소스 허용
                         .anyRequest().authenticated()
                 )
-
-/*                .formLogin(login -> login  // form 방식 로그인 사용
-                        .defaultSuccessUrl("/index", true)
-                        .permitAll()
-                )*/
                 .formLogin(loginForm -> loginForm  //  커스텀 form 방식 로그인 사용
                         .loginPage("/login")
                         .defaultSuccessUrl("/index", true)
