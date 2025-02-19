@@ -47,7 +47,7 @@ public class SecurityConfig {
                 )
                 .formLogin(loginForm -> loginForm  //  커스텀 form 방식 로그인 사용
                         .loginPage("/login")
-                        .defaultSuccessUrl("/index", true)
+                        .defaultSuccessUrl("/main", true)
                         .permitAll()
                 )
                 .logout(logout -> logout

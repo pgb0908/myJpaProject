@@ -1,10 +1,12 @@
 package bong.service.collector.domain;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 
 @Entity
+@Getter
 @Table(name = "likes")
 public class Like {
 
