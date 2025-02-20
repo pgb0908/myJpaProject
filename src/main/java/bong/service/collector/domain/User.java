@@ -1,7 +1,6 @@
 package bong.service.collector.domain;
 
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
@@ -15,10 +14,11 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
     private Long id;
 
-    @Column(unique = true)
-    private String userId;
+    @Column(name = "login_id", unique = true)
+    private String loginId;
 
     @Column(nullable = false)
     private String password;
