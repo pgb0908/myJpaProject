@@ -1,6 +1,6 @@
 package bong.service.collector.controller;
 
-import bong.service.collector.service.LoginService;
+import bong.service.collector.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @RequiredArgsConstructor
 public class LoginController {
 
-    private final LoginService userService;
+    private final UserService userService;
 
     @GetMapping("/login")
     public String login(HttpServletRequest request) {

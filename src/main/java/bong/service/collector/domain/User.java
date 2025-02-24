@@ -27,8 +27,8 @@ public class User {
 
     private LocalDateTime createAt;
 
-    @OneToOne(mappedBy = "user")
-    private Item item;
+    @OneToMany(mappedBy = "user")
+    private List<Item> items = new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
     private List<Like> likes = new ArrayList<>();

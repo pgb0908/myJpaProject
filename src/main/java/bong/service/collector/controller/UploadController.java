@@ -27,7 +27,7 @@ public class UploadController {
             return "redirect:/main";
         }
 
-        itemService.addNewOne(uploadImageRequest.getTitle(),
+        itemService.uploadImage(uploadImageRequest.getTitle(),
                 uploadImageRequest.getDesc(),
                 uploadImageRequest.getFile());
 

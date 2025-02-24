@@ -24,7 +24,6 @@ public class MainPageController {
     @RequestMapping("/main/uploadImage")
     public String uploadImage(){
 
-
         return "upload";
     }
 }

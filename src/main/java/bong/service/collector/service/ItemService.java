@@ -2,25 +2,38 @@ package bong.service.collector.service;
 
 import bong.service.collector.domain.Item;
 import bong.service.collector.repository.ItemRepository;
-import jakarta.persistence.EntityManager;
+import bong.service.collector.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Slf4j
 @Service
 @Transactional
 @RequiredArgsConstructor
 public class ItemService {
 
     private final ItemRepository itemRepository;
+    private final UserRepository userRepository;
 
-    public void saveItem(Item item){
-        itemRepository.save(item);
+
+    public String getCurrentUserId() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication != null && authentication.getPrincipal() instanceof UserDetails) {
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            return userDetails.getUsername(); // 기본적으로 username이 ID 역할
+        }
+
+        return null; // 로그인되지 않은 경우
     }
 
     public void updateItem(Long itemId, String title, String desc){
@@ -38,13 +51,19 @@ public class ItemService {
         return itemRepository.findOne(itemId);
     }
 
-    public void addNewOne(String title,
-                          String desc, MultipartFile file){
 
-        Item item = new Item();
-        item.setTitle(title);
-        item.setDescription(desc);
+    public void uploadImage(String title,
+                            String desc, MultipartFile file){
 
-        saveItem(item);
+        var user = userRepository.findByLoginId(getCurrentUserId());
+
+        if(user.isPresent()){
+            log.info("유저 로그인 id: " + user.get().getLoginId());
+
+            Item item = Item.createImage(title, desc, file, user.get());
+            itemRepository.save(item);
+        }else{
+            throw new RuntimeException("로그인 되지 않았습니다");
+        }
     }
 }

@@ -16,7 +16,7 @@ import java.util.Optional;
 @Slf4j
 public class SecurityService implements UserDetailsService {
 
-    private final LoginService loginService;
+    private final UserService loginService;
     private final PasswordEncoder passwordEncoder;
 
     @Override
