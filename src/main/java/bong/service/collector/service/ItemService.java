@@ -6,6 +6,8 @@ import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -34,5 +36,15 @@ public class ItemService {
 
     public Item findOne(Long itemId){
         return itemRepository.findOne(itemId);
+    }
+
+    public void addNewOne(String title,
+                          String desc, MultipartFile file){
+
+        Item item = new Item();
+        item.setTitle(title);
+        item.setDescription(desc);
+
+        saveItem(item);
     }
 }
