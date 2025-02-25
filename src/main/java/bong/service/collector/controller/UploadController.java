@@ -1,6 +1,6 @@
 package bong.service.collector.controller;
 
-import bong.service.collector.dto.UploadImageRequest;
+import bong.service.collector.dto.uploadImageDto;
 import bong.service.collector.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -18,7 +18,7 @@ public class UploadController {
 
     @PostMapping("/upload")
     public String handleFileUpload(
-            @ModelAttribute UploadImageRequest uploadImageRequest,
+            @ModelAttribute uploadImageDto uploadImageRequest,
             RedirectAttributes redirectAttributes
             ){
 

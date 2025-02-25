@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -40,15 +41,14 @@ public class ItemService {
         var item = itemRepository.findOne(itemId);
         item.setTitle(title);
         item.setDescription(desc);
-        item.setUploadAt(LocalDateTime.now()); // todo zone 설정 나중에
     }
 
     public List<Item> findItem(){
         return itemRepository.findAll();
     }
 
-    public Item findOne(Long itemId){
-        return itemRepository.findOne(itemId);
+    public Optional<Item> findById(Long itemId){
+        return Optional.ofNullable(itemRepository.findOne(itemId));
     }
 
 
@@ -60,7 +60,11 @@ public class ItemService {
         if(user.isPresent()){
             log.info("유저 로그인 id: " + user.get().getLoginId());
 
-            Item item = Item.createImage(title, desc, file, user.get());
+            String type = file.getContentType();
+            String url = "/home/bont/Pictures/" + file.getOriginalFilename();
+            String thumbnail = "/home/bont/Pictures/thumbnail/" + file.getOriginalFilename();
+
+            Item item = Item.createImage(title, type, url, thumbnail, desc, user.get());
             itemRepository.save(item);
         }else{
             throw new RuntimeException("로그인 되지 않았습니다");
