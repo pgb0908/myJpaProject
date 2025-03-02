@@ -22,7 +22,7 @@ public class HomeController {
         Authentication authentication = securityContext.getAuthentication();
         if (authentication != null && authentication.isAuthenticated()) {
             log.info("log-in: " + authentication.getName());
-            return "index";
+            return "main";
         } else {
             return "redirect:/login";
         }
@@ -34,4 +34,5 @@ public class HomeController {
 
         return "main";
     }
+
 }

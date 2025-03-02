@@ -1,12 +1,14 @@
 package bong.service.collector.domain;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Getter
 @Table(name = "collections")
 public class Collection {
 

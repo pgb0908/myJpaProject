@@ -9,11 +9,11 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class LoginService {
+public class UserService {
 
     private final UserRepository userRepository;
 
     public Optional<User> findOne(String userId) {
-        return userRepository.findByUserId(userId);
+        return userRepository.findByLoginId(userId);
     }
 }

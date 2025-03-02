@@ -16,7 +16,7 @@ import java.util.Optional;
 @Slf4j
 public class SecurityService implements UserDetailsService {
 
-    private final LoginService loginService;
+    private final UserService loginService;
     private final PasswordEncoder passwordEncoder;
 
     @Override
@@ -27,7 +27,7 @@ public class SecurityService implements UserDetailsService {
 
 
         return org.springframework.security.core.userdetails.User.builder()
-                .username(newMember.getUserId())
+                .username(newMember.getLoginId())
                 .password(newMember.getPassword())
                 .roles(newMember.getRoles())
                 .build();
