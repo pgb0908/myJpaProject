@@ -18,7 +18,7 @@
     <!-- 저장된 이미지 목록을 순회하면서 출력 -->
     <li th:each="image : ${images}">
       <img th:src="@{${image.filePath}}" alt="Uploaded Image" width="200">
-      <p th:text="${image.filename}"></p>
+      <p th:text="${image.filePath}"></p>
     </li>
   </ul>
 </div>

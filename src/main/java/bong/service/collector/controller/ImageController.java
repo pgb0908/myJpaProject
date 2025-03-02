@@ -1,5 +1,8 @@
 package bong.service.collector.controller;
 
+import bong.service.collector.domain.Item;
+import bong.service.collector.service.ItemService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -20,18 +23,28 @@ import java.util.List;
 @RequestMapping("images")
 @Controller
 @Slf4j
+@RequiredArgsConstructor
 public class ImageController {
+
+    private final ItemService itemService;
+
     @GetMapping("/list")
     public  String image(Model model){
 
+        List<Item> imageList = itemService.findItem();
+
         List<ImagesEntity> images = new ArrayList<>();
-        ImagesEntity image1 = new ImagesEntity();
-        image1.setFilePath("dup1.png");
-        image1.setFilename("dup1.png");
-        images.add(image1);
+        for(Item image : imageList){
+            ImagesEntity entity = new ImagesEntity();
+            entity.setFilePath(image.getImageUrl());
+            entity.setFilename(image.getImageUrl());
+            images.add(entity);
+
+        }
 
         model.addAttribute("images", images);
 
         return "images";
     }
+
 }

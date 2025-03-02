@@ -12,7 +12,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,8 +51,8 @@ public class ItemService {
     }
 
 
-    public void uploadImage(String title,
-                            String desc, MultipartFile file){
+    public void saveImage(String title,
+                          String savedUrl, String desc, MultipartFile file){
 
         var user = userRepository.findByLoginId(getCurrentUserId());
 
@@ -61,10 +60,9 @@ public class ItemService {
             log.info("유저 로그인 id: " + user.get().getLoginId());
 
             String type = file.getContentType();
-            String url = "/home/bont/Pictures/" + file.getOriginalFilename();
-            String thumbnail = "/home/bont/Pictures/thumbnail/" + file.getOriginalFilename();
+            String thumbnail = file.getOriginalFilename();
 
-            Item item = Item.createImage(title, type, url, thumbnail, desc, user.get());
+            Item item = Item.createImage(title, type, savedUrl, thumbnail, desc, user.get());
             itemRepository.save(item);
         }else{
             throw new RuntimeException("로그인 되지 않았습니다");
